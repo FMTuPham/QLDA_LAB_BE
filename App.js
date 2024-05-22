@@ -3,7 +3,10 @@ const db = require('./config/database');
 const app = express();
 const Movie = require('./models/movie.model')
 const movieRoutes = require('./routes/movieRoutes')
-const port = 3000;
+const userRoutes = require('./routes/userRoutes')
+const cors = require('cors');
+const User = require('./models/user.model');
+const port = 3001;
 
 async function startApp() {
   try {
@@ -12,10 +15,11 @@ async function startApp() {
 
     await db.sync();
     await Movie.sync();
+    await User.sync();
     console.log('All models were synchronized successfully.');
 
-    app.listen(3000, () => {
-      console.log('Server is running on port 3000');
+    app.listen(port, () => {
+      console.log('Server is running on port 3001');
     });
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -26,4 +30,6 @@ async function startApp() {
 startApp();
 
 app.use(express.json());
-app.use('/api', movieRoutes)
+app.use(cors())
+app.use(movieRoutes)
+app.use(userRoutes)

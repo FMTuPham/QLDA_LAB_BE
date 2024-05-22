@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Movie = sequelize.define('Movie', {
@@ -13,6 +13,18 @@ const Movie = sequelize.define('Movie', {
   releaseYear: {
     type: DataTypes.INTEGER,
     allowNull: true
+  },
+  director: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  releaseYear: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  genre: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {});
 
